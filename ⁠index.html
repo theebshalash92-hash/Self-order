@@ -3,11 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>اطلب سلطتك المفضلة - السلط بار</title>
+    <title>تطبيق السلط بار الذاتي</title>
     <link rel="stylesheet" href="style.css">
-    <!-- استيراد خط عربي عصيري -->
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
-    <!-- مكتبة الأيقونات FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -15,12 +13,12 @@
     <header class="header">
         <div class="container">
             <h1><i class="fa-solid fa-bowl-food"></i> صمم سلطتك على ذوقك</h1>
-            <p>اختر مكوناتك المفضلة وسنحضّرها لك طازجة فوراً!</p>
+            <p>اختر مكوناتك المفضلة وسنحضّرها لك طازجة!</p>
         </div>
     </header>
 
     <main class="container main-content">
-        <!-- قسم اختيار الحجم -->
+        <!-- الحجم -->
         <section class="section-card">
             <h2>1. اختر الحجم الأساسي</h2>
             <div class="sizes-grid">
@@ -28,7 +26,7 @@
                     <input type="radio" name="saladSize" value="عادي" data-price="3.5" checked>
                     <div class="size-info">
                         <strong>حجم عادي</strong>
-                        <span>قاعدة + 4 إضافات + صوص</span>
+                        <span>قاعدة + إضافات متعددة</span>
                     </div>
                     <span class="price">3.5 دينار</span>
                 </label>
@@ -36,25 +34,77 @@
                     <input type="radio" name="saladSize" value="كبير" data-price="4.5">
                     <div class="size-info">
                         <strong>حجم كبير (مشبع)</strong>
-                        <span>قاعدة + 6 إضافات + بروتين + صوص</span>
+                        <span>حجم عائلي أو مشبع</span>
                     </div>
                     <span class="price">4.5 دينار</span>
                 </label>
             </div>
         </section>
 
-        <!-- قسم الأصناف (أكثر من 15 صنفاً) -->
-        <div id="ingredients-container">
-            <!-- سيتم تعبئة الأصناف برمجياً أو عرضها مباشرة هنا -->
-        </div>
-
-        <!-- ملاحظات إضافية -->
+        <!-- قاعدة السلطة -->
         <section class="section-card">
-            <h2>ملاحظات خاصة للتحضير</h2>
-            <textarea id="orderNotes" placeholder="مثال: الصوص على جنب، بدون بصل، زيادة ليمون..."></textarea>
+            <h2>2. قاعدة السلطة الأساسية</h2>
+            <div class="items-grid">
+                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="خس آيسبرغ طازج"><span>خس آيسبرغ طازج</span></label>
+                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="جرجير بلدي"><span>جرجير بلدي</span></label>
+                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="سبانخ بيبي"><span>سبانخ بيبي</span></label>
+                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="كينوا مسلوقة"><span>كينوا مسلوقة</span></label>
+            </div>
         </section>
 
-        <!-- ملخص الطلب وزر الإرسال -->
+        <!-- البروتينات -->
+        <section class="section-card">
+            <h2>3. البروتينات الصحية</h2>
+            <div class="items-grid">
+                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="دجاج مشوي ترياكي"><span>دجاج مشوي ترياكي</span></label>
+                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="تونة صافي"><span>تونة صافي</span></label>
+                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="حمص مسلوق"><span>حمص مسلوق</span></label>
+                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="جبن فِتا مكعبات"><span>جبن فِتا مكعبات</span></label>
+                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="بيض مسلوق"><span>بيض مسلوق</span></label>
+            </div>
+        </section>
+
+        <!-- الخضار والإضافات -->
+        <section class="section-card">
+            <h2>4. الخضار والإضافات الملونة</h2>
+            <div class="items-grid">
+                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="طماطم كرزية"><span>طماطم كرزية</span></label>
+                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="خيار مقطع"><span>خيار مقطع</span></label>
+                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="ذرة حلوة"><span>ذرة حلوة</span></label>
+                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="فلفل رومي ملون"><span>فلفل رومي ملون</span></label>
+                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="زيتون أسود شرائح"><span>زيتون أسود شرائح</span></label>
+                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="جزر مبشور"><span>جزر مبشور</span></label>
+            </div>
+        </section>
+
+        <!-- المقرمشات -->
+        <section class="section-card">
+            <h2>5. المقرمشات والبذور</h2>
+            <div class="items-grid">
+                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="خبز محمص بالأعشاب"><span>خبز محمص بالأعشاب</span></label>
+                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="جوز أمريكي مقرمش"><span>جوز أمريكي مقرمش</span></label>
+                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="بذور دوار الشمس"><span>بذور دوار الشمس</span></label>
+            </div>
+        </section>
+
+        <!-- الصوصات -->
+        <section class="section-card">
+            <h2>6. الصوصات اللذيذة</h2>
+            <div class="items-grid">
+                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="صوص سيزار"><span>صوص سيزار</span></label>
+                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="ليمون وزيت زيتون أصلي"><span>ليمون وزيت زيتون</span></label>
+                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="عسل وخردل"><span>عسل وخردل</span></label>
+                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="صوص رانش"><span>صوص رانش</span></label>
+            </div>
+        </section>
+
+        <!-- ملاحظات -->
+        <section class="section-card">
+            <h2>ملاحظات خاصة للتحضير</h2>
+            <textarea id="orderNotes" placeholder="مثال: الصوص على جنب، بدون بصل..."></textarea>
+        </section>
+
+        <!-- شريط الملخص -->
         <div class="order-summary-bar">
             <div class="total-display">
                 <span>المجموع الكلي:</span>

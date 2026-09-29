@@ -1,1 +1,71 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اطلب سلطتك المفضلة - السلط بار</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- استيراد خط عربي عصيري -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <!-- مكتبة الأيقونات FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
 
+    <header class="header">
+        <div class="container">
+            <h1><i class="fa-solid fa-bowl-food"></i> صمم سلطتك على ذوقك</h1>
+            <p>اختر مكوناتك المفضلة وسنحضّرها لك طازجة فوراً!</p>
+        </div>
+    </header>
+
+    <main class="container main-content">
+        <!-- قسم اختيار الحجم -->
+        <section class="section-card">
+            <h2>1. اختر الحجم الأساسي</h2>
+            <div class="sizes-grid">
+                <label class="size-card active">
+                    <input type="radio" name="saladSize" value="عادي" data-price="3.5" checked>
+                    <div class="size-info">
+                        <strong>حجم عادي</strong>
+                        <span>قاعدة + 4 إضافات + صوص</span>
+                    </div>
+                    <span class="price">3.5 دينار</span>
+                </label>
+                <label class="size-card">
+                    <input type="radio" name="saladSize" value="كبير" data-price="4.5">
+                    <div class="size-info">
+                        <strong>حجم كبير (مشبع)</strong>
+                        <span>قاعدة + 6 إضافات + بروتين + صوص</span>
+                    </div>
+                    <span class="price">4.5 دينار</span>
+                </label>
+            </div>
+        </section>
+
+        <!-- قسم الأصناف (أكثر من 15 صنفاً) -->
+        <div id="ingredients-container">
+            <!-- سيتم تعبئة الأصناف برمجياً أو عرضها مباشرة هنا -->
+        </div>
+
+        <!-- ملاحظات إضافية -->
+        <section class="section-card">
+            <h2>ملاحظات خاصة للتحضير</h2>
+            <textarea id="orderNotes" placeholder="مثال: الصوص على جنب، بدون بصل، زيادة ليمون..."></textarea>
+        </section>
+
+        <!-- ملخص الطلب وزر الإرسال -->
+        <div class="order-summary-bar">
+            <div class="total-display">
+                <span>المجموع الكلي:</span>
+                <strong id="totalPrice">3.50</strong> دينار
+            </div>
+            <button id="checkoutBtn" class="btn-checkout" onclick="sendOrderWhatsApp()">
+                <i class="fa-brands fa-whatsapp"></i> إرسال الطلب عبر واتساب
+            </button>
+        </div>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>

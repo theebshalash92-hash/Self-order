@@ -4,9 +4,221 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تطبيق السلط بار الذاتي</title>
-    <link rel="stylesheet" href="style.css">
+    <!-- استيراد خط عربي عصري -->
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <!-- مكتبة الأيقونات FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #2e7d32;
+            --primary-light: #4caf50;
+            --accent-color: #8bc34a;
+            --bg-color: #f4f6f5;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+            --gray-color: #777777;
+            --border-radius: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            padding-bottom: 100px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            color: white;
+            padding: 25px 0;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        .main-content {
+            margin-top: 20px;
+        }
+
+        .section-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .section-card h2 {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--bg-color);
+            padding-bottom: 8px;
+        }
+
+        .sizes-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .size-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 2px solid #ddd;
+            border-radius: var(--border-radius);
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .size-card input {
+            display: none;
+        }
+
+        .size-card.active {
+            border-color: var(--primary-color);
+            background-color: rgba(76, 175, 80, 0.05);
+        }
+
+        .size-info strong {
+            display: block;
+            font-size: 1.05rem;
+        }
+
+        .size-info span {
+            font-size: 0.8rem;
+            color: var(--gray-color);
+        }
+
+        .size-card .price {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 12px;
+        }
+
+        .item-checkbox {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.2s;
+            background: #fafafa;
+            display: block;
+        }
+
+        .item-checkbox input {
+            margin-bottom: 5px;
+        }
+
+        .item-checkbox span {
+            display: block;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .item-checkbox input:checked + span {
+            color: var(--primary-color);
+        }
+
+        .item-checkbox:has(input:checked) {
+            border-color: var(--primary-light);
+            background-color: rgba(76, 175, 80, 0.08);
+        }
+
+        textarea {
+            width: 100%;
+            height: 80px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 0.95rem;
+            resize: none;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .order-summary-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .total-display span {
+            font-size: 0.9rem;
+            color: var(--gray-color);
+        }
+
+        .total-display strong {
+            font-size: 1.4rem;
+            color: var(--primary-color);
+        }
+
+        .btn-checkout {
+            background-color: #25d366;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.2s;
+        }
+
+        .btn-checkout:hover {
+            background-color: #1ebe5d;
+        }
+
+        @media (max-width: 600px) {
+            .sizes-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -45,10 +257,10 @@
         <section class="section-card">
             <h2>2. قاعدة السلطة الأساسية</h2>
             <div class="items-grid">
-                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="خس آيسبرغ طازج"><span>خس آيسبرغ طازج</span></label>
-                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="جرجير بلدي"><span>جرجير بلدي</span></label>
-                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="سبانخ بيبي"><span>سبانخ بيبي</span></label>
-                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="كينوا مسلوقة"><span>كينوا مسلوقة</span></label>
+                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="خس آيسبرغ طازج" onchange="updateTotal()"><span>خس آيسبرغ طازج</span></label>
+                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="جرجير بلدي" onchange="updateTotal()"><span>جرجير بلدي</span></label>
+                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="سبانخ بيبي" onchange="updateTotal()"><span>سبانخ بيبي</span></label>
+                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="كينوا مسلوقة" onchange="updateTotal()"><span>كينوا مسلوقة</span></label>
             </div>
         </section>
 
@@ -56,11 +268,11 @@
         <section class="section-card">
             <h2>3. البروتينات الصحية</h2>
             <div class="items-grid">
-                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="دجاج مشوي ترياكي"><span>دجاج مشوي ترياكي</span></label>
-                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="تونة صافي"><span>تونة صافي</span></label>
-                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="حمص مسلوق"><span>حمص مسلوق</span></label>
-                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="جبن فِتا مكعبات"><span>جبن فِتا مكعبات</span></label>
-                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="بيض مسلوق"><span>بيض مسلوق</span></label>
+                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="دجاج مشوي ترياكي" onchange="updateTotal()"><span>دجاج مشوي ترياكي</span></label>
+                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="تونة صافي" onchange="updateTotal()"><span>تونة صافي</span></label>
+                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="حمص مسلوق" onchange="updateTotal()"><span>حمص مسلوق</span></label>
+                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="جبن فِتا مكعبات" onchange="updateTotal()"><span>جبن فِتا مكعبات</span></label>
+                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="بيض مسلوق" onchange="updateTotal()"><span>بيض مسلوق</span></label>
             </div>
         </section>
 
@@ -68,12 +280,12 @@
         <section class="section-card">
             <h2>4. الخضار والإضافات الملونة</h2>
             <div class="items-grid">
-                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="طماطم كرزية"><span>طماطم كرزية</span></label>
-                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="خيار مقطع"><span>خيار مقطع</span></label>
-                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="ذرة حلوة"><span>ذرة حلوة</span></label>
-                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="فلفل رومي ملون"><span>فلفل رومي ملون</span></label>
-                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="زيتون أسود شرائح"><span>زيتون أسود شرائح</span></label>
-                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="جزر مبشور"><span>جزر مبشور</span></label>
+                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="طماطم كرزية" onchange="updateTotal()"><span>طماطم كرزية</span></label>
+                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="خيار مقطع" onchange="updateTotal()"><span>خيار مقطع</span></label>
+                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="ذرة حلوة" onchange="updateTotal()"><span>ذرة حلوة</span></label>
+                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="فلفل رومي ملون" onchange="updateTotal()"><span>فلفل رومي ملون</span></label>
+                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="زيتون أسود شرائح" onchange="updateTotal()"><span>زيتون أسود شرائح</span></label>
+                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="جزر مبشور" onchange="updateTotal()"><span>جزر مبشور</span></label>
             </div>
         </section>
 
@@ -81,9 +293,9 @@
         <section class="section-card">
             <h2>5. المقرمشات والبذور</h2>
             <div class="items-grid">
-                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="خبز محمص بالأعشاب"><span>خبز محمص بالأعشاب</span></label>
-                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="جوز أمريكي مقرمش"><span>جوز أمريكي مقرمش</span></label>
-                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="بذور دوار الشمس"><span>بذور دوار الشمس</span></label>
+                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="خبز محمص بالأعشاب" onchange="updateTotal()"><span>خبز محمص بالأعشاب</span></label>
+                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="جوز أمريكي مقرمش" onchange="updateTotal()"><span>جوز أمريكي مقرمش</span></label>
+                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="بذور دوار الشمس" onchange="updateTotal()"><span>بذور دوار الشمس</span></label>
             </div>
         </section>
 
@@ -91,10 +303,10 @@
         <section class="section-card">
             <h2>6. الصوصات اللذيذة</h2>
             <div class="items-grid">
-                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="صوص سيزار"><span>صوص سيزار</span></label>
-                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="ليمون وزيت زيتون أصلي"><span>ليمون وزيت زيتون</span></label>
-                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="عسل وخردل"><span>عسل وخردل</span></label>
-                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="صوص رانش"><span>صوص رانش</span></label>
+                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="صوص سيزار" onchange="updateTotal()"><span>صوص سيزار</span></label>
+                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="ليمون وزيت زيتون" onchange="updateTotal()"><span>ليمون وزيت زيتون</span></label>
+                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="عسل وخردل" onchange="updateTotal()"><span>عسل وخردل</span></label>
+                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="صوص رانش" onchange="updateTotal()"><span>صوص رانش</span></label>
             </div>
         </section>
 
@@ -116,6 +328,58 @@
         </div>
     </main>
 
-    <script src="app.js"></script>
+    <script>
+        // تفاعل اختيار الحجم
+        const sizeCards = document.querySelectorAll(".size-card");
+        sizeCards.forEach(card => {
+            card.addEventListener("click", () => {
+                sizeCards.forEach(c => c.classList.remove("active"));
+                card.classList.add("active");
+                card.querySelector("input").checked = true;
+                updateTotal();
+            });
+        });
+
+        // حساب السعر الإجمالي
+        function updateTotal() {
+            const selectedSize = document.querySelector('input[name="saladSize"]:checked');
+            let basePrice = selectedSize ? parseFloat(selectedSize.dataset.price) : 3.5;
+            document.getElementById("totalPrice").textContent = basePrice.toFixed(2);
+        }
+
+        // إرسال الطلب عبر واتساب
+        function sendOrderWhatsApp() {
+            const selectedSize = document.querySelector('input[name="saladSize"]:checked').value;
+            const checkedItems = Array.from(document.querySelectorAll('input[name="ingredient"]:checked')).map(el => el.value);
+            const notes = document.getElementById("orderNotes").value;
+            const totalPrice = document.getElementById("totalPrice").textContent;
+
+            if (checkedItems.length === 0) {
+                alert("الرجاء اختيار بعض المكونات لسلطتك أولاً!");
+                return;
+            }
+
+            let message = `*طلب سلطة جديد 🥗*%0A`;
+            message += `------------------%0A`;
+            message += `*الحجم:* ${selectedSize}%0A`;
+            message += `*المكونات المختارة:*%0A`;
+            checkedItems.forEach((item) => {
+                message += `• ${item}%0A`;
+            });
+            
+            if (notes.trim() !== "") {
+                message += `*ملاحظات:* ${notes}%0A`;
+            }
+            
+            message += `------------------%0A`;
+            message += `*المجموع الإجمالي:* ${totalPrice} دينار`;
+
+            // ضع رقم الواتساب الخاص بك هنا (مثلاً: 96279xxxxxxx)
+            const phoneNumber = "962790000000"; 
+            
+            const whatsappURL = `https://wa.me/${phoneNumber}?text=${message}`;
+            window.open(whatsappURL, '_blank');
+        }
+    </script>
 </body>
 </html>

@@ -2,383 +2,353 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تطبيق السلط بار الذاتي</title>
-    <!-- استيراد خط عربي عصري -->
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
-    <!-- مكتبة الأيقونات FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>JJ's Supermarket - We are JJ's, we are locally yours</title>
     <style>
         :root {
-            --primary-color: #2e7d32;
-            --primary-light: #4caf50;
-            --accent-color: #8bc34a;
-            --bg-color: #f4f6f5;
+            --primary-color: #1e3a8a;
+            --accent-color: #b91c1c;
+            --bg-color: #f3f4f6;
+            --text-color: #111827;
             --card-bg: #ffffff;
-            --text-color: #333333;
-            --gray-color: #777777;
-            --border-radius: 12px;
+            --success-color: #059669;
+            --font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Tajawal', sans-serif;
-        }
-
         body {
+            font-family: var(--font-family);
             background-color: var(--bg-color);
             color: var(--text-color);
-            padding-bottom: 100px;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 15px;
-        }
-
-        .header {
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
-            color: white;
-            padding: 25px 0;
-            text-align: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-
-        .header h1 {
-            font-size: 1.8rem;
-            margin-bottom: 5px;
-        }
-
-        .header p {
-            font-size: 0.95rem;
-            opacity: 0.9;
-        }
-
-        .main-content {
-            margin-top: 20px;
-        }
-
-        .section-card {
-            background: var(--card-bg);
-            border-radius: var(--border-radius);
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-        }
-
-        .section-card h2 {
-            font-size: 1.2rem;
-            color: var(--primary-color);
-            margin-bottom: 15px;
-            border-bottom: 2px solid var(--bg-color);
-            padding-bottom: 8px;
-        }
-
-        .sizes-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-
-        .size-card {
+            margin: 0;
+            padding: 0;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border: 2px solid #ddd;
-            border-radius: var(--border-radius);
+            flex-direction: column;
+            height: 100vh;
+        }
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        header h1 { margin: 0; font-size: 1.4rem; font-weight: 700; }
+        header p { margin: 3px 0 0; font-size: 0.85rem; opacity: 0.85; }
+
+        main {
+            flex: 1;
+            overflow-y: auto;
             padding: 15px;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            padding-bottom: 200px;
         }
+        h2 { font-size: 1.2rem; margin-top: 5px; margin-bottom: 15px; color: var(--primary-color); border-right: 4px solid var(--primary-color); padding-right: 10px;}
 
-        .size-card input {
-            display: none;
-        }
-
-        .size-card.active {
-            border-color: var(--primary-color);
-            background-color: rgba(76, 175, 80, 0.05);
-        }
-
-        .size-info strong {
-            display: block;
-            font-size: 1.05rem;
-        }
-
-        .size-info span {
-            font-size: 0.8rem;
-            color: var(--gray-color);
-        }
-
-        .size-card .price {
-            font-weight: bold;
-            color: var(--primary-color);
-        }
-
-        .items-grid {
+        .products-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 12px;
+            gap: 15px;
         }
-
-        .item-checkbox {
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            padding: 12px;
-            text-align: center;
-            cursor: pointer;
-            transition: 0.2s;
-            background: #fafafa;
-            display: block;
-        }
-
-        .item-checkbox input {
-            margin-bottom: 5px;
-        }
-
-        .item-checkbox span {
-            display: block;
-            font-size: 0.95rem;
-            font-weight: 500;
-        }
-
-        .item-checkbox input:checked + span {
-            color: var(--primary-color);
-        }
-
-        .item-checkbox:has(input:checked) {
-            border-color: var(--primary-light);
-            background-color: rgba(76, 175, 80, 0.08);
-        }
-
-        textarea {
-            width: 100%;
-            height: 80px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
+        .product-card {
+            background: var(--card-bg);
+            border-radius: 12px;
             padding: 10px;
-            font-size: 0.95rem;
-            resize: none;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .product-img-placeholder {
+            background-color: #e5e7eb;
+            height: 75px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            display: flex; align-items: center; justify-content: center;
+            color: #4b5563; font-size: 0.75rem; font-weight: bold;
+        }
+        .product-card h3 { font-size: 0.95rem; margin: 0 0 5px; font-weight: 600; line-height: 1.3; }
+        .product-card .price { color: var(--accent-color); font-weight: 700; font-size: 1.1rem; margin-bottom: 8px; }
+        .btn-add {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 0;
+            width: 100%;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
         }
 
-        textarea:focus {
-            outline: none;
-            border-color: var(--primary-color);
-        }
-
-        .order-summary-bar {
+        .floating-cart {
             position: fixed;
             bottom: 0;
             left: 0;
-            right: 0;
+            width: 100%;
             background: white;
             box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
-            padding: 15px 20px;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            padding: 15px;
+            box-sizing: border-box;
+            transition: transform 0.3s ease-in-out;
+            z-index: 50;
+        }
+        .cart-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            z-index: 1000;
+            margin-bottom: 10px;
+            cursor: pointer;
         }
-
-        .total-display span {
+        .cart-header h3 { margin: 0; font-size: 1.1rem; }
+        .cart-badge {
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            width: 24px; height: 24px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.8rem; font-weight: bold;
+        }
+        .cart-details { display: none; }
+        .cart-details.active { display: block; }
+        
+        .cart-items-list {
+            list-style: none; padding: 0; margin: 0 0 10px 0;
+            max-height: 110px; overflow-y: auto;
             font-size: 0.9rem;
-            color: var(--gray-color);
         }
-
-        .total-display strong {
-            font-size: 1.4rem;
-            color: var(--primary-color);
-        }
-
+        .cart-items-list li { display: flex; justify-content: space-between; margin-bottom: 5px; border-bottom: 1px solid #eee; padding-bottom: 3px; }
+        .cart-total { display: flex; justify-content: space-between; font-weight: bold; font-size: 1.1rem; margin-bottom: 15px; color: var(--accent-color); }
+        
+        .checkout-form { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+        .form-group { margin-bottom: 5px; }
+        .form-group.full { grid-column: span 2; }
+        .form-group label { display: block; font-size: 0.75rem; color: #666; margin-bottom: 2px; }
+        .form-group input { width: 100%; padding: 8px; box-sizing: border-box; border: 1px solid #ddd; border-radius: 6px; font-size: 0.9rem; }
+        
         .btn-checkout {
-            background-color: #25d366;
+            background-color: var(--success-color);
             color: white;
             border: none;
-            padding: 12px 25px;
-            border-radius: 30px;
-            font-size: 1rem;
+            padding: 12px;
+            width: 100%;
+            border-radius: 8px;
+            font-size: 1.05rem;
             font-weight: bold;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: 0.2s;
         }
-
-        .btn-checkout:hover {
-            background-color: #1ebe5d;
-        }
-
-        @media (max-width: 600px) {
-            .sizes-grid {
-                grid-template-columns: 1fr;
-            }
-        }
+        .btn-checkout:disabled { background-color: #ccc; cursor: not-allowed; }
     </style>
 </head>
 <body>
 
-    <header class="header">
-        <div class="container">
-            <h1><i class="fa-solid fa-bowl-food"></i> صمم سلطتك على ذوقك</h1>
-            <p>اختر مكوناتك المفضلة وسنحضّرها لك طازجة!</p>
-        </div>
+    <header>
+        <h1>JJ's Supermarket</h1>
+        <p>We are JJ's, we are locally yours</p>
     </header>
 
-    <main class="container main-content">
-        <!-- الحجم -->
-        <section class="section-card">
-            <h2>1. اختر الحجم الأساسي</h2>
-            <div class="sizes-grid">
-                <label class="size-card active">
-                    <input type="radio" name="saladSize" value="عادي" data-price="3.5" checked>
-                    <div class="size-info">
-                        <strong>حجم عادي</strong>
-                        <span>قاعدة + إضافات متعددة</span>
-                    </div>
-                    <span class="price">3.5 دينار</span>
-                </label>
-                <label class="size-card">
-                    <input type="radio" name="saladSize" value="كبير" data-price="4.5">
-                    <div class="size-info">
-                        <strong>حجم كبير (مشبع)</strong>
-                        <span>حجم عائلي أو مشبع</span>
-                    </div>
-                    <span class="price">4.5 دينار</span>
-                </label>
-            </div>
-        </section>
-
-        <!-- قاعدة السلطة -->
-        <section class="section-card">
-            <h2>2. قاعدة السلطة الأساسية</h2>
-            <div class="items-grid">
-                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="خس آيسبرغ طازج" onchange="updateTotal()"><span>خس آيسبرغ طازج</span></label>
-                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="جرجير بلدي" onchange="updateTotal()"><span>جرجير بلدي</span></label>
-                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="سبانخ بيبي" onchange="updateTotal()"><span>سبانخ بيبي</span></label>
-                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="كينوا مسلوقة" onchange="updateTotal()"><span>كينوا مسلوقة</span></label>
-            </div>
-        </section>
-
-        <!-- البروتينات -->
-        <section class="section-card">
-            <h2>3. البروتينات الصحية</h2>
-            <div class="items-grid">
-                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="دجاج مشوي ترياكي" onchange="updateTotal()"><span>دجاج مشوي ترياكي</span></label>
-                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="تونة صافي" onchange="updateTotal()"><span>تونة صافي</span></label>
-                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="حمص مسلوق" onchange="updateTotal()"><span>حمص مسلوق</span></label>
-                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="جبن فِتا مكعبات" onchange="updateTotal()"><span>جبن فِتا مكعبات</span></label>
-                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="بيض مسلوق" onchange="updateTotal()"><span>بيض مسلوق</span></label>
-            </div>
-        </section>
-
-        <!-- الخضار والإضافات -->
-        <section class="section-card">
-            <h2>4. الخضار والإضافات الملونة</h2>
-            <div class="items-grid">
-                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="طماطم كرزية" onchange="updateTotal()"><span>طماطم كرزية</span></label>
-                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="خيار مقطع" onchange="updateTotal()"><span>خيار مقطع</span></label>
-                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="ذرة حلوة" onchange="updateTotal()"><span>ذرة حلوة</span></label>
-                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="فلفل رومي ملون" onchange="updateTotal()"><span>فلفل رومي ملون</span></label>
-                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="زيتون أسود شرائح" onchange="updateTotal()"><span>زيتون أسود شرائح</span></label>
-                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="جزر مبشور" onchange="updateTotal()"><span>جزر مبشور</span></label>
-            </div>
-        </section>
-
-        <!-- المقرمشات -->
-        <section class="section-card">
-            <h2>5. المقرمشات والبذور</h2>
-            <div class="items-grid">
-                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="خبز محمص بالأعشاب" onchange="updateTotal()"><span>خبز محمص بالأعشاب</span></label>
-                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="جوز أمريكي مقرمش" onchange="updateTotal()"><span>جوز أمريكي مقرمش</span></label>
-                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="بذور دوار الشمس" onchange="updateTotal()"><span>بذور دوار الشمس</span></label>
-            </div>
-        </section>
-
-        <!-- الصوصات -->
-        <section class="section-card">
-            <h2>6. الصوصات اللذيذة</h2>
-            <div class="items-grid">
-                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="صوص سيزار" onchange="updateTotal()"><span>صوص سيزار</span></label>
-                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="ليمون وزيت زيتون" onchange="updateTotal()"><span>ليمون وزيت زيتون</span></label>
-                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="عسل وخردل" onchange="updateTotal()"><span>عسل وخردل</span></label>
-                <label class="item-checkbox"><input type="checkbox" name="ingredient" value="صوص رانش" onchange="updateTotal()"><span>صوص رانش</span></label>
-            </div>
-        </section>
-
-        <!-- ملاحظات -->
-        <section class="section-card">
-            <h2>ملاحظات خاصة للتحضير</h2>
-            <textarea id="orderNotes" placeholder="مثال: الصوص على جنب، بدون بصل..."></textarea>
-        </section>
-
-        <!-- شريط الملخص -->
-        <div class="order-summary-bar">
-            <div class="total-display">
-                <span>المجموع الكلي:</span>
-                <strong id="totalPrice">3.50</strong> دينار
-            </div>
-            <button id="checkoutBtn" class="btn-checkout" onclick="sendOrderWhatsApp()">
-                <i class="fa-brands fa-whatsapp"></i> إرسال الطلب عبر واتساب
-            </button>
-        </div>
+    <main>
+        <h2>أقسام المنتجات السريعة</h2>
+        <div class="products-grid" id="products-grid"></div>
     </main>
 
+    <div class="floating-cart" id="floating-cart">
+        <div class="cart-header" onclick="toggleCartDetails()">
+            <h3>سلة التسوق</h3>
+            <div class="cart-badge" id="cart-badge">0</div>
+            <span id="cart-chevron" style="font-size: 1.2rem; color: #777;">▲</span>
+        </div>
+        
+        <div class="cart-details" id="cart-details">
+            <ul class="cart-items-list" id="cart-items-list">
+                <li style="color: #999; text-align: center; justify-content: center;">السلة فارغة</li>
+            </ul>
+            <div class="cart-total">
+                <span>المجموع:</span>
+                <span id="cart-total">0.00 د.أ</span>
+            </div>
+
+            <div class="checkout-form">
+                <div class="form-group">
+                    <label>الاسم الكريم</label>
+                    <input type="text" id="customer-name" placeholder="اسمك...">
+                </div>
+                <div class="form-group">
+                    <label>رقم الهاتف</label>
+                    <input type="tel" id="customer-phone" placeholder="07xxxxxxxx">
+                </div>
+                <div class="form-group full">
+                    <label>العنوان التفصيلي / ملاحظات</label>
+                    <input type="text" id="customer-address" placeholder="المنطقة، الشارع، رقم البناية...">
+                </div>
+            </div>
+            
+            <button class="btn-checkout" id="btn-checkout" onclick="submitOrder()">إتمام وتثبيت الطلب</button>
+        </div>
+    </div>
+
     <script>
-        // تفاعل اختيار الحجم
-        const sizeCards = document.querySelectorAll(".size-card");
-        sizeCards.forEach(card => {
-            card.addEventListener("click", () => {
-                sizeCards.forEach(c => c.classList.remove("active"));
-                card.classList.add("active");
-                card.querySelector("input").checked = true;
-                updateTotal();
-            });
+        const products = [
+            { id: 1, name: "حليب طازج المراعي 1 لتر", price: 1.25, category: "ألبان وأجبان" },
+            { id: 2, name: "خبز عربي طازج (كيس)", price: 0.50, category: "المخبوزات" },
+            { id: 3, name: "أرز بسمتي الشعلان 5 كجم", price: 6.75, category: "تموينات" },
+            { id: 4, name: "بيض طازج محلي (طبق 30)", price: 3.50, category: "ألبان وبيض" },
+            { id: 5, name: "مياه معدنية (12 حبة)", price: 1.95, category: "المشروبات" },
+            { id: 6, name: "شيبسي ليز حار نار عائلي", price: 1.10, category: "المسليات" },
+            { id: 7, name: "كوكاكولا 1.25 لتر", price: 0.90, category: "المشروبات" },
+            { id: 8, name: "تونة قطع فاخرة", price: 1.40, category: "تموينات" }
+        ];
+
+        let cart = [];
+        let isCartExpanded = false;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts();
+            setTimeout(updateCartPosition, 100);
         });
 
-        // حساب السعر الإجمالي
-        function updateTotal() {
-            const selectedSize = document.querySelector('input[name="saladSize"]:checked');
-            let basePrice = selectedSize ? parseFloat(selectedSize.dataset.price) : 3.5;
-            document.getElementById("totalPrice").textContent = basePrice.toFixed(2);
+        function renderProducts() {
+            const grid = document.getElementById('products-grid');
+            products.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    <div class="product-img-placeholder">${product.category}</div>
+                    <h3>${product.name}</h3>
+                    <div class="price">${product.price.toFixed(2)} د.أ</div>
+                    <button class="btn-add" onclick="addToCart(${product.id}, '${product.name}', ${product.price})">إضافة للسلة</button>
+                `;
+                grid.appendChild(card);
+            });
         }
 
-        // إرسال الطلب عبر واتساب
-        function sendOrderWhatsApp() {
-            const selectedSize = document.querySelector('input[name="saladSize"]:checked').value;
-            const checkedItems = Array.from(document.querySelectorAll('input[name="ingredient"]:checked')).map(el => el.value);
-            const notes = document.getElementById("orderNotes").value;
-            const totalPrice = document.getElementById("totalPrice").textContent;
+        function addToCart(id, name, price) {
+            let existingItem = cart.find(item => item.id === id);
+            if (existingItem) {
+                existingItem.qty++;
+            } else {
+                cart.push({ id, name, price, qty: 1 });
+            }
+            updateCartUI();
+            if (!isCartExpanded && cart.length === 1) {
+                toggleCartDetails();
+            }
+        }
 
-            if (checkedItems.length === 0) {
-                alert("الرجاء اختيار بعض المكونات لسلطتك أولاً!");
+        function updateCartUI() {
+            const badge = document.getElementById('cart-badge');
+            const list = document.getElementById('cart-items-list');
+            const totalEl = document.getElementById('cart-total');
+            const checkoutBtn = document.getElementById('btn-checkout');
+
+            const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+            badge.textContent = totalItems;
+            badge.style.display = totalItems > 0 ? 'flex' : 'none';
+
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            totalEl.textContent = totalPrice.toFixed(2) + ' د.أ';
+
+            list.innerHTML = '';
+            if (cart.length === 0) {
+                list.innerHTML = '<li style="color: #999; text-align: center; justify-content: center;">السلة فارغة</li>';
+                checkoutBtn.disabled = true;
+                return;
+            }
+            checkoutBtn.disabled = false;
+
+            cart.forEach(item => {
+                const li = document.createElement('li');
+                li.innerHTML = `<span>${item.name} (x${item.qty})</span> <span>${(item.price * item.qty).toFixed(2)} د.أ</span>`;
+                list.appendChild(li);
+            });
+        }
+
+        function toggleCartDetails() {
+            const details = document.getElementById('cart-details');
+            const chevron = document.getElementById('cart-chevron');
+            isCartExpanded = !isCartExpanded;
+
+            if (isCartExpanded) {
+                details.classList.add('active');
+                chevron.textContent = '▼';
+                document.getElementById('floating-cart').style.transform = 'translateY(0)';
+            } else {
+                details.classList.remove('active');
+                chevron.textContent = '▲';
+                updateCartPosition();
+            }
+        }
+
+        function updateCartPosition() {
+            const headerHeight = document.querySelector('.cart-header').offsetHeight;
+            document.getElementById('floating-cart').style.transform = `translateY(calc(100% - ${headerHeight + 30}px))`;
+        }
+
+        async function submitOrder() {
+            const name = document.getElementById('customer-name').value.trim();
+            const phone = document.getElementById('customer-phone').value.trim();
+            const address = document.getElementById('customer-address').value.trim();
+
+            if (!name || !phone) {
+                alert('الرجاء إدخال الاسم ورقم الهاتف الأساسي.');
                 return;
             }
 
-            let message = `*طلب سلطة جديد 🥗*%0A`;
-            message += `------------------%0A`;
-            message += `*الحجم:* ${selectedSize}%0A`;
-            message += `*المكونات المختارة:*%0A`;
-            checkedItems.forEach((item) => {
-                message += `• ${item}%0A`;
-            });
-            
-            if (notes.trim() !== "") {
-                message += `*ملاحظات:* ${notes}%0A`;
-            }
-            
-            message += `------------------%0A`;
-            message += `*المجموع الإجمالي:* ${totalPrice} دينار`;
+            const orderData = {
+                customerName: name,
+                phone: phone,
+                address: address || 'بدون عنوان محدد',
+                items: cart,
+                total: cart.reduce((sum, i) => sum + (i.price * i.qty), 0)
+            };
 
-            // ضع رقم الواتساب الخاص بك هنا (مثلاً: 96279xxxxxxx)
-            const phoneNumber = "962790000000"; 
-            
-            const whatsappURL = `https://wa.me/${phoneNumber}?text=${message}`;
-            window.open(whatsappURL, '_blank');
+            // 1. ضع رابط الـ Web App الخاص بك هنا بين العلامتين
+            const scriptURL = 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL';
+
+            // 2. ضع رقم الواتساب الخاص بك هنا (مثال: 962791234567)
+            const whatsappNumber = '962xxxxxxxxx';
+
+            try {
+                // إرسال البيانات لجوجل شيت في الخلفية
+                fetch(scriptURL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(orderData)
+                }).catch(err => console.log('Sheet log note:', err));
+
+                // بناء رسالة الواتساب الفورية
+                let message = `*طلب جديد من متجر JJ's*%0A%0A`;
+                message += `*الاسم:* ${name}%0A`;
+                message += `*الهاتف:* ${phone}%0A`;
+                message += `*العنوان:* ${address}%0A%0A`;
+                message += `*المنتجات:*%0A`;
+                
+                cart.forEach(item => {
+                    message += `- ${item.name} (x${item.qty}): ${(item.price * item.qty).toFixed(2)} د.أ%0A`;
+                });
+                
+                message += `%0A*الإجمالي الكلي: ${orderData.total.toFixed(2)} د.أ*`;
+
+                // فتح واتساب
+                window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
+
+                alert('تم تسجيل طلبك في نظام السوبر ماركت وإرساله عبر الواتساب بنجاح!');
+                
+                // إعادة ضبط السلة
+                cart = [];
+                updateCartUI();
+                document.getElementById('customer-name').value = '';
+                document.getElementById('customer-phone').value = '';
+                document.getElementById('customer-address').value = '';
+                if (isCartExpanded) toggleCartDetails();
+
+            } catch (error) {
+                alert('حدث خطأ بسيط، يرجى المحاولة مرة أخرى.');
+            }
         }
     </script>
 </body>
